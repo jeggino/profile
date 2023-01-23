@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 
-page = option_menu(None,["Biography", "Ecology","Data Science","Photography"], 
+page = option_menu(None,["Biography", "Ecology","Data Science","Photography","Music"], 
                  icons=["bi bi-info-lg","bi bi-tree-fill",
                         "bi bi-bar-chart-fill","bi bi-camera2",
                         ],
