@@ -17,7 +17,7 @@ page = option_menu(None,["Biography",
                  icons=["bi bi-info-lg","bi bi-tree-fill",
                         "bi bi-bar-chart-fill","bi bi-camera2",
                         "bi bi-file-earmark-music-fill"],
-                 default_index=0, orientation="orizontal",
+                 default_index=1, orientation="orizontal",
                  )
 
 st.title("My website")
