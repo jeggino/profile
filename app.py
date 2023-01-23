@@ -4,7 +4,7 @@ from streamlit_option_menu import option_menu
 st.title("My website")
 
 with st.sidebar:
-  page = option_menu(["Biography", 
+  page = option_menu(None,["Biography", 
                               "Ecology",
                               "Data Science",
                               "Photography", 
