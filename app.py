@@ -9,7 +9,9 @@ with st.sidebar:
                               "Data Science",
                               "Photography", 
                               "Music"], 
-#                      icons=["bi bi-info-circle","bi-calculator"],
-                     default_index=1, orientation="vertical",
+                     icons=["bi bi-info-lg","bi bi-tree-fill",
+                            "bi bi-bar-chart-fill","bi bi-camera2",
+                            "bi bi-file-earmark-music-fill"],
+                     default_index=0, orientation="vertical",
                      menu_icon="cast")
   
