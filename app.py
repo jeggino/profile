@@ -12,6 +12,6 @@ with st.sidebar:
                      icons=["bi bi-info-lg","bi bi-tree-fill",
                             "bi bi-bar-chart-fill","bi bi-camera2",
                             "bi bi-file-earmark-music-fill"],
-                     default_index=0, orientation="vertical",
+                     default_index=5, orientation="vertical",
                      menu_icon="cast")
   
