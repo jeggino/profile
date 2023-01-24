@@ -7,3 +7,5 @@ pandas
 
 seaborn
 matplotlib
+
+streamlit_player
