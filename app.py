@@ -58,7 +58,7 @@ df_model['price_class'] = pd.cut(df_model.Price,
 
 df_2 = df_model.groupby('price_class').mean().round(2)
 """
-    st.code(body, language="python")
+        st.code(body, language="python")
     st.dataframe(df_2)
     
     
