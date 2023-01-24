@@ -7,6 +7,9 @@ from streamlit_folium import st_folium
 
 import pandas as pd
 
+import seaborn as sns
+import matplotlib.pyplot as plt
+
 st.set_page_config(
     page_title="Profile",
     page_icon="🧊",
@@ -29,6 +32,17 @@ if page == "Data Science":
     # import the raw data
     df_raw = pd.read_csv("HousingPrices-Amsterdam-August-2021 (1).csv").iloc[:,1:]
     st.dataframe(df_raw)
+    
+    # create the dataset
+    df_model = df_raw[['Price', 'Area', 'Room','Gebied']]
+    
+    fig = plt.figure(figsize=(10, 4))
+    sns.pairplot(df_model[['Price', 'Area', 'Room']], diag_kind='auto',corner=True)
+    sns.set_theme(style="white")
+    
+    st.pyplot(fig)
+    
+    # map
     m = folium.Map(location=[44.266308, 11.719301], zoom_start=3)
     Draw(draw_options={'circle': False,'rectangle': False,'circlemarker': False}).add_to(m)
     Fullscreen().add_to(m)
