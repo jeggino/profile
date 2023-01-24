@@ -10,6 +10,8 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+from streamlit_player import st_player
+
 st.set_page_config(
     page_title="Profile",
     page_icon="🧊",
@@ -79,5 +81,8 @@ elif page == "Ecology":
     
 elif page == "Photography":
     st.image("My project.png")
+    
+elif page == "Music":    
+    st_player("https://youtu.be/x3uEN78cS4Y")
 
   
