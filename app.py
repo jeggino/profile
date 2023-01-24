@@ -38,6 +38,7 @@ if page == "Data Science":
     sns.set_theme(style="white")
     st.pyplot(fig)
     
+    # create the classes
     df_model['price_class'] = pd.cut(df_model.Price,
                                  bins=[df_model["Price"].min(),
                                        df_model["Price"].mean(),
@@ -54,12 +55,12 @@ if page == "Data Science":
 
     
     
-    
-    # map
-    m = folium.Map(location=[44.266308, 11.719301], zoom_start=3)
-    Draw(draw_options={'circle': False,'rectangle': False,'circlemarker': False}).add_to(m)
-    Fullscreen().add_to(m)
-    LocateControl(auto_start=True).add_to(m)
-    output = st_folium(m, returned_objects=["all_drawings"],width=1200, height=600)
+    if page == "Ecology":
+        # map
+        m = folium.Map(location=[44.266308, 11.719301], zoom_start=3)
+        Draw(draw_options={'circle': False,'rectangle': False,'circlemarker': False}).add_to(m)
+        Fullscreen().add_to(m)
+        LocateControl(auto_start=True).add_to(m)
+        output = st_folium(m, returned_objects=["all_drawings"],width=1200, height=600)
 
   
