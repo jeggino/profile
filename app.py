@@ -27,7 +27,7 @@ st.title("My website")
 
 if page == "Data Science":
     # import the raw data
-    df_raw = pd.read_csv('HousingPrices-Amsterdam-August-2021.csv').iloc[:,1:]
+    df_raw = pd.read_csv("HousingPrices-Amsterdam-August-2021 (1).csv").iloc[:,1:]
     st.dataframe(sf_raw)
     m = folium.Map(location=[44.266308, 11.719301], zoom_start=3)
     Draw(draw_options={'circle': False,'rectangle': False,'circlemarker': False}).add_to(m)
