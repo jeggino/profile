@@ -5,6 +5,8 @@ import folium
 from folium.plugins import Draw, Fullscreen, LocateControl
 from streamlit_folium import st_folium
 
+import pandas as pd
+
 st.set_page_config(
     page_title="Profile",
     page_icon="🧊",
@@ -22,7 +24,11 @@ page = option_menu(None,["Biography", "Ecology","Data Science","Photography","Mu
 
 st.title("My website")
 
+
 if page == "Data Science":
+    # import the raw data
+    df_raw = pd.read_csv('HousingPrices-Amsterdam-August-2021.csv').iloc[:,1:]
+    st.dataframe(sf_raw)
     m = folium.Map(location=[44.266308, 11.719301], zoom_start=3)
     Draw(draw_options={'circle': False,'rectangle': False,'circlemarker': False}).add_to(m)
     Fullscreen().add_to(m)
