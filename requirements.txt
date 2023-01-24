@@ -4,3 +4,6 @@ streamlit_folium
 folium
 
 pandas
+
+seaborn
+matplotlib
