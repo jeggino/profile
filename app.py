@@ -46,7 +46,7 @@ if page == "Data Science":
                                  labels=['low','high'])
     
     df_2 = df_model.groupby('price_class').mean().round(2)
-    sr.dataframe(df_2)
+    st.dataframe(df_2)
     
     
     
