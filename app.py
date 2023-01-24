@@ -47,8 +47,7 @@ if page == "Data Science":
                                  labels=['low','high'])
     
     df_2 = df_model.groupby('price_class').mean().round(2)
-    body = """
-    df_model['price_class'] = pd.cut(df_model.Price,
+    body = """df_model['price_class'] = pd.cut(df_model.Price,
                                     bins=[df_model["Price"].min(),
                                             df_model["Price"].mean(),
                                             df_model["Price"].max()],
