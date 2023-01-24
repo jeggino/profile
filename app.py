@@ -31,16 +31,29 @@ st.title("My website")
 if page == "Data Science":
     # import the raw data
     df_raw = pd.read_csv("HousingPrices-Amsterdam-August-2021 (1).csv").iloc[:,1:]
-    st.dataframe(df_raw)
     
     # create the dataset
     df_model = df_raw[['Price', 'Area', 'Room']]
-    
-#     fig = plt.figure(figsize=(10, 4))
     fig = sns.pairplot(df_model[['Price', 'Area', 'Room']], diag_kind='auto',corner=True)
     sns.set_theme(style="white")
-    
     st.pyplot(fig)
+    
+    df_model['price_class'] = pd.cut(df_model.Price,
+                                 bins=[df_model["Price"].min(),
+                                       df_model["Price"].mean(),
+                                       df_model["Price"].max()],
+                                 include_lowest=True,
+                                 labels=['low','high'])
+    
+    df_2 = df_model.groupby('price_class').mean().round(2)
+    sr.dataframe(df_2)
+    
+    
+    
+
+
+    
+    
     
     # map
     m = folium.Map(location=[44.266308, 11.719301], zoom_start=3)
