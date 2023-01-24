@@ -1,2 +1,4 @@
 streamlit
 streamlit_option_menu
+streamlit_folium
+folium
