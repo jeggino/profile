@@ -25,10 +25,11 @@ page = option_menu(None,["Biography", "Ecology","Data Science","Photography","Mu
                  default_index=1, orientation="horizontal", menu_icon="cast",
                  )
 
-st.title("My website")
+if page == "Biography":
+    st.title("My website")
 
 
-if page == "Data Science":
+elif page == "Data Science":
     # import the raw data
     df_raw = pd.read_csv("HousingPrices-Amsterdam-August-2021 (1).csv").iloc[:,1:]
     
