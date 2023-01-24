@@ -36,8 +36,8 @@ if page == "Data Science":
     # create the dataset
     df_model = df_raw[['Price', 'Area', 'Room']]
     
-    fig = plt.figure(figsize=(10, 4))
-    sns.pairplot(df_model[['Price', 'Area', 'Room']], diag_kind='auto',corner=True)
+#     fig = plt.figure(figsize=(10, 4))
+    fig = sns.pairplot(df_model[['Price', 'Area', 'Room']], diag_kind='auto',corner=True)
     sns.set_theme(style="white")
     
     st.pyplot(fig)
