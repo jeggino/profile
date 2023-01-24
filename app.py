@@ -75,5 +75,9 @@ elif page == "Ecology":
     Fullscreen().add_to(m)
     LocateControl(auto_start=True).add_to(m)
     output = st_folium(m, returned_objects=["all_drawings"])
+    
+    
+elif page == "Photography":
+    st.image("My project.png")
 
   
