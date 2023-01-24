@@ -27,7 +27,7 @@ if page == "Data Science":
     Draw(draw_options={'circle': False,'rectangle': False,'circlemarker': False}).add_to(m)
     Fullscreen().add_to(m)
     LocateControl(auto_start=True).add_to(m)
-    output = st_folium(m, returned_objects=["all_drawings"])
+    output = st_folium(m, returned_objects=["all_drawings"],, width=1200, height=600)
 
   
 #   , width=350, height=600
