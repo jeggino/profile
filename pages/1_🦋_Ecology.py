@@ -42,6 +42,8 @@ geo_df = gpd.GeoDataFrame(geo_df, geometry='geometry',crs={'init':'epsg:4326'}).
 geo_df.to_crs(epsg=3310,inplace=True)
 geo_df['distance (Km)'] = round(geo_df.length / 1000)
 
+st.dataframe(geo_df)
+
 source = geo_df
 
 chart_1 = alt.Chart(source).mark_bar(
