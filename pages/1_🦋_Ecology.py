@@ -28,6 +28,7 @@ df_raw = pd.read_csv('pages/bird_migration (1).csv')
 df_raw["date_time"] = pd.to_datetime(df_raw["date_time"])
 df_1 = df_raw[['date_time','bird_name', 'latitude', 'longitude']]
 df_1['month'] = df_1.date_time.dt.month_name()
+st.dataframe(df_1)
 
 st.subheader("Calculate the distance covered per month")
 
