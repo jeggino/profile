@@ -25,7 +25,7 @@ from h3 import h3
 st.set_page_config(page_title="Ecology", page_icon="🦋")
 
 st.write(
-        f'<iframe src="https://luigigiugliano.shinyapps.io/Amsterdam_SolarPanels/"></iframe>',
+        f'<iframe width: 100%; height: 710px; overflow: auto; src="https://luigigiugliano.shinyapps.io/Amsterdam_SolarPanels/"></iframe>',
         unsafe_allow_html=True,
     )
 
