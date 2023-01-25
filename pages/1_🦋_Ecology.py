@@ -34,17 +34,14 @@ st.subheader("Calculate the distance covered per month")
 
 #zip the coordinates into a point object and convert to a GeoData Frame
 geometry = [Point(xy) for xy in zip(df_1.longitude,df_1.latitude,)]
-st.write(geometry)
 geo_df = gpd.GeoDataFrame(df_1, geometry=geometry)
-st.dataframe(geo_df)
-
 geo_df = geo_df.groupby(['bird_name','month'])['geometry'].apply(lambda x:LineString(x.tolist()))
-geo_df = gpd.GeoDataFrame(geo_df, geometry='geometry',crs={'init':'epsg:3310'}).reset_index()
+geo_df = gpd.GeoDataFrame(geo_df, geometry='geometry',crs={'init':'epsg:4326'}).reset_index()
 geo_df.to_crs(epsg=3310,inplace=True)
 geo_df['distance (Km)'] = round(geo_df.length / 1000)
 st.error("ERROR!!!!!!!!!!!!!!")
 
-source = pd.DataFrame(geo_df.drop(columns='geometry'))
+source = pd.DataFrame()
 st.dataframe(source)
 
 altair_chart = alt.Chart(source).mark_bar(
