@@ -42,7 +42,7 @@ geo_df = gpd.GeoDataFrame(geo_df, geometry='geometry',crs={'init':'epsg:3310'}).
 geo_df['distance (Km)'] = round(geo_df.length / 1000)
 st.error("ERROR!!!!!!!!!!!!!!")
 
-source = geo_df
+source = pd.DataFrame(geo_df.drop(columns='geometry'))
 
 altair_chart = alt.Chart(source).mark_bar(
 ).encode(
