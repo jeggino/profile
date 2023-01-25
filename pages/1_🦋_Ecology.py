@@ -21,7 +21,7 @@ import altair as alt
 st.set_page_config(page_title="Ecology", page_icon="🦋")
 
 
-df_raw = pd.read_csv('bird_migration.csv')
+df_raw = pd.read_csv('bird_migration (1).csv')
 
 # some altitude were negative probably a typo 
 df_raw.altitude = df_raw.altitude.apply(lambda x: x * -1 if x<0 else x)
