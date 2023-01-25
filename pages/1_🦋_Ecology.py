@@ -43,6 +43,7 @@ geo_df['distance (Km)'] = round(geo_df.length / 1000)
 st.error("ERROR!!!!!!!!!!!!!!")
 
 source = pd.DataFrame(geo_df.drop(columns='geometry'))
+st.dataframe(source)
 
 altair_chart = alt.Chart(source).mark_bar(
 ).encode(
@@ -54,4 +55,4 @@ altair_chart = alt.Chart(source).mark_bar(
                       sort=['August','September','October','November', 'December','January', 'February', 'March','April'])
 )
 
-st.altair_chart(altair_chart, use_container_width=False, theme=None)
+st.altair_chart(altair_chart, use_container_width=True, theme=None)
