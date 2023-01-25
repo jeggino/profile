@@ -215,3 +215,84 @@ with right:
 
 "---"
 
+st.subheader("Create a choropleth using the H3 geospatial indexing system to show where the birds spent more time.")
+
+h3_level = 6 #~35Km2
+ 
+def lat_lng_to_h3(row):
+    return h3.geo_to_h3(row.geometry.y, row.geometry.x, h3_level)
+ 
+#zip the coordinates into a point object and convert to a GeoData Frame
+geometry = [Point(xy) for xy in zip(df_1.longitude, df_raw.latitude)]
+geo_df = gpd.GeoDataFrame(df_1, geometry=geometry,crs="EPSG:4326")
+geo_df['h3'] = geo_df.apply(lat_lng_to_h3, axis=1)
+geo_df['Date'] = geo_df['date_time'].dt.to_period('D')
+geo_df.head()
+
+df_hexagon = geo_df.groupby(['bird_name','h3']).agg(number_of_points = ('h3','count')).reset_index()
+
+def add_geometry(row):
+    points = h3.h3_to_geo_boundary(
+      row['h3'], True)
+    return Polygon(points)
+
+
+df_hexagon['geometry'] = df_hexagon.apply(add_geometry, axis=1)
+df_hexagon = gpd.GeoDataFrame(df_hexagon, crs="EPSG:4326")
+
+df_base = df_hexagon
+
+
+# create a map
+centroid = df_base.centroid
+m = folium.Map(location=[centroid.y.mean(), centroid.x.mean()], zoom_start=4,control_scale=False,tiles=None )
+
+tile_layer = folium.TileLayer(
+    tiles='https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',
+    attr='Google_map',
+    control=False,
+    opacity=1
+)
+tile_layer.add_to(m)
+
+
+for var in df_base['bird_name'].unique():
+    df_geo = df_base[df_base['bird_name']==var]
+    
+    c = folium.Choropleth(
+        geo_data=df_geo.to_json(),
+        name=var,
+        data=df_geo,
+        columns=["h3", 'number_of_points'],
+        key_on="feature.properties.h3",
+        fill_color='Reds',
+        fill_opacity=0.6,
+        legend_name=var,
+        overlay=False,
+        highlight=True,
+        line_opacity=.8,
+    ).add_child(folium.TileLayer(tiles='https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',attr='Google_map')).add_to(m)
+    
+    
+    for key in list(c._children):
+        if key.startswith('color_map'):
+            del(c._children[key])
+   
+    c.geojson.add_child(folium.features.GeoJsonTooltip(fields=['number_of_points'],
+                                                       aliases=['number_of_points'],
+                                                       style=('background-color: white; color: black; font-family:''Courier New; font-size: 12px; padding: 10px;')
+                                                      )
+                       )
+    
+
+
+# Add a layer control panel to the map.
+m.add_child(folium.LayerControl(collapsed=True))
+
+#fullscreen
+folium.plugins.Fullscreen().add_to(m)
+
+
+st_folium(m)
+
+
