@@ -15,4 +15,4 @@ altair
 shapely
 geopandas 
 
-streamlit-on-Hover-tabs
+st_aggrid
