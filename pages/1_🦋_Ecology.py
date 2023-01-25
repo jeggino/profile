@@ -44,12 +44,14 @@ geo_df['distance (Km)'] = round(geo_df.length / 1000)
 
 source = geo_df
 
-chart_1 = alt.Chart(source).mark_bar().encode(
+chart_1 = alt.Chart(source).mark_bar(
+).encode(
     x=alt.X('bird_name:N',title=''),
     y='distance (Km):Q',
     color='bird_name:N',
-    column=alt.Column('month:N',align="all",
-                     sort=['August','September','October','November', 'December','January', 'February', 'March','April'])
+    column=alt.Column('month:N',
+                      align="all",
+                      sort=['August','September','October','November', 'December','January', 'February', 'March','April'])
 )
 
 st.altair_chart(chart_1, use_container_width=True)
