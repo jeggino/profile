@@ -14,6 +14,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import altair as alt
 
+import date_time
+
 
 
 
@@ -23,12 +25,9 @@ st.set_page_config(page_title="Ecology", page_icon="🦋")
 
 df_raw = pd.read_csv('pages/bird_migration (1).csv')
 
-# some altitude were negative probably a typo 
-df_raw.altitude = df_raw.altitude.apply(lambda x: x * -1 if x<0 else x)
-
 # convert in date_time data
 df_raw["date_time"] = pd.to_datetime(df_raw["date_time"])
-df_1 = df_raw[['date_time','bird_name', 'latitude', 'longitude','altitude']]
+df_1 = df_raw[['date_time','bird_name', 'latitude', 'longitude']]
 df_1['month'] = df_1.date_time.dt.month_name()
 
 st.subheader("Calculate the distance covered per month")
@@ -56,4 +55,4 @@ altair_chart = alt.Chart(source).mark_bar(
                       sort=['August','September','October','November', 'December','January', 'February', 'March','April'])
 )
 
-st.altair_chart(altair_chart, use_container_width=True, theme=None)
+st.altair_chart(altair_chart, use_container_width=False, theme=None)
