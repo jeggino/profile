@@ -13,3 +13,4 @@ streamlit_player
 altair
 
 shapely
+geopandas 
