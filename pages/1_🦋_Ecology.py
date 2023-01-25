@@ -33,6 +33,7 @@ st.subheader("Calculate the distance covered per month")
 
 #zip the coordinates into a point object and convert to a GeoData Frame
 geometry = [Point(xy) for xy in zip(df_1.longitude,df_1.latitude,)]
+st.write(geometry)
 geo_df = gpd.GeoDataFrame(df_1, geometry=geometry)
 
 geo_df = geo_df.groupby(['bird_name','month'])['geometry'].apply(lambda x:LineString(x.tolist()))
