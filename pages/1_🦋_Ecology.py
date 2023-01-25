@@ -38,11 +38,9 @@ geometry = [Point(xy) for xy in zip(df_1.longitude,df_1.latitude,)]
 geo_df = gpd.GeoDataFrame(df_1, geometry=geometry)
 
 geo_df = geo_df.groupby(['bird_name','month'])['geometry'].apply(lambda x:LineString(x.tolist()))
-geo_df = gpd.GeoDataFrame(geo_df, geometry='geometry',crs={'init':'epsg:4326'}).reset_index()
-geo_df.to_crs(epsg=3310,inplace=True)
+geo_df = gpd.GeoDataFrame(geo_df, geometry='geometry',crs={'init':'epsg:3310'}).reset_index()
 geo_df['distance (Km)'] = round(geo_df.length / 1000)
 st.error("ERROR!!!!!!!!!!!!!!")
-st.dataframe(geo_df)
 
 source = geo_df
 
@@ -56,4 +54,4 @@ chart_1 = alt.Chart(source).mark_bar(
                       sort=['August','September','October','November', 'December','January', 'February', 'March','April'])
 )
 
-st.altair_chart(chart_1, use_container_width=True)
+# st.altair_chart(chart_1, use_container_width=True)
