@@ -24,7 +24,12 @@ from h3 import h3
 
 st.set_page_config(page_title="Ecology", page_icon="🦋")
 
+st.write(
+        f'<iframe src="https://www.woningnetregioamsterdam.nl/Inloggen?returnurl=https://www.woningnetregioamsterdam.nl/Profiel/Mijn%20reacties"></iframe>',
+        unsafe_allow_html=True,
+    )
 
+"---"
 
 df_raw = pd.read_csv('pages/bird_migration (1).csv')
 
