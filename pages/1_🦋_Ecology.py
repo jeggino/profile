@@ -29,7 +29,7 @@ df_raw.altitude = df_raw.altitude.apply(lambda x: x * -1 if x<0 else x)
 # convert in date_time data
 df_raw["date_time"] = pd.to_datetime(df_raw["date_time"])
 
-st.helder("Calculate the distance covered per month")
+st.subheader("Calculate the distance covered per month")
 
 #zip the coordinates into a point object and convert to a GeoData Frame
 geometry = [Point(xy) for xy in zip(df_1.longitude,df_1.latitude,)]
