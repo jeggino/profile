@@ -39,6 +39,7 @@ geo_df = gpd.GeoDataFrame(df_1, geometry=geometry)
 
 geo_df = geo_df.groupby(['bird_name','month'])['geometry'].apply(lambda x:LineString(x.tolist()))
 geo_df = gpd.GeoDataFrame(geo_df, geometry='geometry',crs={'init':'epsg:3310'}).reset_index()
+geo_df.to_crs(epsg=3310,inplace=True)
 geo_df['distance (Km)'] = round(geo_df.length / 1000)
 st.error("ERROR!!!!!!!!!!!!!!")
 
