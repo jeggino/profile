@@ -44,7 +44,7 @@ st.error("ERROR!!!!!!!!!!!!!!")
 
 source = geo_df
 
-chart_1 = alt.Chart(source).mark_bar(
+altair_chart = alt.Chart(source).mark_bar(
 ).encode(
     x=alt.X('bird_name:N',title=''),
     y='distance (Km):Q',
@@ -54,4 +54,4 @@ chart_1 = alt.Chart(source).mark_bar(
                       sort=['August','September','October','November', 'December','January', 'February', 'March','April'])
 )
 
-# st.altair_chart(chart_1, use_container_width=True)
+st.altair_chart(altair_chart, use_container_width=False, theme=None)
