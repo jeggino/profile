@@ -180,11 +180,38 @@ df_point['time'] = df_point['date_time'].dt.time
 
 distance = df_point.to_crs({'init': 'epsg:6933'}).loc[0,'geometry'].distance(df_point.to_crs({'init': 'epsg:6340'}).loc[1,'geometry'])
 distance_2 = df_point.to_crs({'init': 'epsg:6933'}).loc[2,'geometry'].distance(df_point.to_crs({'init': 'epsg:6340'}).loc[3,'geometry'])
-f"""
-On 25th April 2014, Nico and Eric where at 20:09 and 21:13 respectively at {round(distance,2)} meters distance each other.
-It is highly probable that they met between 20:00 and 21:30.
 
-Eric and Sanne were nearby on the same day too ({round(distance_2,2)} meters), but the time gap is too wide that probably 
-they did't cross each other. 
-"""
+left, right = st.columns([1,2])
+with left:
+  f"""
+  On 25th April 2014, Nico and Eric where at 20:09 and 21:13 respectively at {round(distance,2)} meters distance each other.
+  It is highly probable that they met between 20:00 and 21:30.
+
+  Eric and Sanne were nearby on the same day too ({round(distance_2,2)} meters), but the time gap is too wide that probably 
+  they did't cross each other. 
+  """
+
+with right:
+
+  df_base = df_point[['bird_name', 'geometry']].loc[:1]
+
+  # create a map
+  centroid = df_base.centroid
+  m = folium.Map(location=[centroid.y.mean(), centroid.x.mean()], zoom_start=15,tiles='OpenStreetMap')
+
+
+  style_function = lambda x: {'fillColor': '#0000ff' if
+                               x['properties']['bird_name']=='Eric' else
+                               '#00ff00'}
+
+  folium.GeoJson(data=df_base,
+                 style_function=style_function,
+                 tooltip=folium.GeoJsonTooltip(['bird_name'],labels=True,),
+                ).add_to(m)
+
+
+
+  st_folium(m)
+
+"---"
 
