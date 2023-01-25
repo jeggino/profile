@@ -8,7 +8,7 @@ from streamlit_folium import st_folium
 
 import pandas as pd
 import geopandas as gpd
-from shapely.geometry import Point, LineString
+from shapely import Point, LineString
 
 import seaborn as sns
 import matplotlib.pyplot as plt
