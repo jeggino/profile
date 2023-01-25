@@ -14,3 +14,5 @@ altair
 
 shapely
 geopandas 
+
+st_on_hover_tabs
