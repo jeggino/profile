@@ -28,6 +28,8 @@ df_raw.altitude = df_raw.altitude.apply(lambda x: x * -1 if x<0 else x)
 
 # convert in date_time data
 df_raw["date_time"] = pd.to_datetime(df_raw["date_time"])
+df_1 = df_raw[['date_time','bird_name', 'latitude', 'longitude','altitude']]
+df_1['month'] = df_1.date_time.dt.month_name()
 
 st.subheader("Calculate the distance covered per month")
 
