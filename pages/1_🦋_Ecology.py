@@ -24,7 +24,6 @@ st.set_page_config(page_title="Ecology", page_icon="🦋")
 
 
 df_raw = pd.read_csv('pages/bird_migration (1).csv')
-AgGrid(df_raw)
 
 # convert in date_time data
 df_raw["date_time"] = pd.to_datetime(df_raw["date_time"])
