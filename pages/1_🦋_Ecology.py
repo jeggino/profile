@@ -41,7 +41,7 @@ geo_df.to_crs(epsg=3310,inplace=True)
 geo_df['distance (Km)'] = round(geo_df.length / 1000)
 st.error("ERROR!!!!!!!!!!!!!!")
 
-source = pd.DataFrame()
+source = pd.DataFrame(geo_df)
 st.dataframe(source)
 
 altair_chart = alt.Chart(source).mark_bar(
