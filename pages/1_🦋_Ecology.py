@@ -8,13 +8,16 @@ from streamlit_folium import st_folium
 
 import pandas as pd
 import geopandas as gpd
-from shapely import Point, LineString
+from shapely import Point, LineString, Polygon
 
 import seaborn as sns
 import matplotlib.pyplot as plt
 import altair as alt
 
 from st_aggrid import AgGrid
+
+# create exagons
+from h3 import h3
 
 
 
@@ -54,6 +57,7 @@ column=alt.Column('month:N',
 
 st.altair_chart(altair_chart, use_container_width=False, theme=None)
 
+"---"
 
 st.subheader("Show the routes through the time")
 
@@ -138,4 +142,49 @@ plugins.Fullscreen().add_to(m)
 
 st_folium(m)
 
+"---"
+
+st.subheader("Find the pricese moment and the place where they met (if there are)")
+
+
+
+h3_level = 14 # ~6m2 area resolution
+ 
+def lat_lng_to_h3(row):
+    return h3.geo_to_h3(row.geometry.y, row.geometry.x, h3_level)
+ 
+#zip the coordinates into a point object and convert to a GeoData Frame
+geometry = [Point(xy) for xy in zip(df_1.longitude, df_raw.latitude)]
+df_points = gpd.GeoDataFrame(df_1, geometry=geometry,crs="EPSG:4326")
+df_points['h3'] = df_points.apply(lat_lng_to_h3, axis=1)
+df_points['Date'] = df_points['date_time'].dt.to_period('D')
+
+df_pol = df_points.groupby(['h3','Date','bird_name'],as_index=False).size()
+df_pol = df_pol[df_pol.duplicated(subset=['h3','Date'],keep=False)]
+
+# create a dataset with the geometry of the exagons and the number of earthquakes and max magnitudo 
+ 
+def add_geometry(row):
+    points = h3.h3_to_geo_boundary(
+      row['h3'], True)
+    return Polygon(points)
+
+
+df_pol['geometry'] = df_pol.apply(add_geometry, axis=1)
+df_pol = gpd.GeoDataFrame(df_pol, crs='EPSG:4326')
+
+df_point = df_points.merge(df_pol[['h3','Date']],on=['h3','Date'],how='right') \
+.drop_duplicates().reset_index(drop=True)
+
+df_point['time'] = df_point['date_time'].dt.time
+
+distance = df_point.to_crs({'init': 'epsg:6933'}).loc[0,'geometry'].distance(df_point.to_crs({'init': 'epsg:6340'}).loc[1,'geometry'])
+distance_2 = df_point.to_crs({'init': 'epsg:6933'}).loc[2,'geometry'].distance(df_point.to_crs({'init': 'epsg:6340'}).loc[3,'geometry'])
+f"""
+On 25th April 2014, Nico and Eric where at 20:09 and 21:13 respectively at {round(distance,2)} meters distance each other.
+It is highly probable that they met between 20:00 and 21:30.
+
+Eric and Sanne were nearby on the same day too ({round(distance_2,2)} meters), but the time gap is too wide that probably 
+they did't cross each other. 
+"""
 
