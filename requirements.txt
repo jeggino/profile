@@ -15,4 +15,4 @@ altair
 shapely
 geopandas 
 
-st_aggrid
+streamlit-aggrid
