@@ -18,3 +18,5 @@ geopandas
 streamlit-aggrid
 
 h3
+
+pydeck 
