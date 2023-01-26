@@ -305,26 +305,34 @@ st_folium(m)
 
 import pydeck as pdk
 
-st.pydeck_chart(pdk.Deck(
-    map_style=None,
-    initial_view_state=pdk.ViewState(
-        latitude=37.76,
-        longitude=-122.4,
-        zoom=6,
-        pitch=50,
-    ),
-    layers=[
-        pdk.Layer(
-           'HexagonLayer',
-           data=df_Eric,
-           get_position='[longitude, latitude]',
-           radius=200,
-           elevation_scale=4,
-           elevation_range=[0, 1000],
-           pickable=True,
-           extruded=True,
-        )
-    ],
-))
+dict_df = {"df_Eric" : df_raw[df_raw.bird_name=='Eric'].reset_index(drop=True),
+           "df_Nico" : df_raw[df_raw.bird_name=='Nico'].reset_index(drop=True),
+           "df_Sanne" : df_raw[df_raw.bird_name=='Sanne'].reset_index(drop=True)}
+
+col_1,col_2,col_3 =st.columns(3)
+x = [col_1,col_2,col_3]
+y = dict_df.keys()
+for col, df in zip(x, y):
+    with col:
+        st.pydeck_chart(pdk.Deck(
+            initial_view_state=pdk.ViewState(
+                latitude=df["latitude"].mean(),
+                longitude=df["longitude"].mean(),
+                zoom=3,
+                pitch=100,
+            ),
+            layers=[
+                pdk.Layer(
+                   'HexagonLayer',
+                   data=df[["longitude", "latitude"]],
+                   get_position=["longitude", "latitude"],
+                   radius=2000,
+                   elevation_scale=4,
+                   elevation_range=[0, 10000],
+                   pickable=True,
+                   extruded=True,
+                )
+            ],
+        ))
 
 
