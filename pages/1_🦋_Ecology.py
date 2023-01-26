@@ -24,7 +24,9 @@ from h3 import h3
 
 st.set_page_config(page_title="Ecology", page_icon="🦋")
 
-st.write("check out this [link]('https://public.tableau.com/views/Bird_migration/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link') for tableau")
+"""
+check out this [link]('https://public.tableau.com/views/Bird_migration/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link') for tableau
+"""
 
 # st.write(
 #         f'<iframe width: 1200px; height: 710px; overflow: auto; src="https://public.tableau.com/views/Bird_migration/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link"></iframe>',
