@@ -316,15 +316,15 @@ for col, df in zip(x, y):
     with col:
         st.pydeck_chart(pdk.Deck(
             initial_view_state=pdk.ViewState(
-                latitude=df["latitude"].mean(),
-                longitude=df["longitude"].mean(),
+                latitude=dict_df["df"]["latitude"].mean(),
+                longitude=dict_df["df"]["longitude"].mean(),
                 zoom=3,
                 pitch=100,
             ),
             layers=[
                 pdk.Layer(
                    'HexagonLayer',
-                   data=df[["longitude", "latitude"]],
+                   data=dict_df["df"][["longitude", "latitude"]],
                    get_position=["longitude", "latitude"],
                    radius=2000,
                    elevation_scale=4,
