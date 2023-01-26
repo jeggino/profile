@@ -316,6 +316,7 @@ x = [col_1,col_2,col_3]
 y = dict_df.keys()
 for col, df in zip(x, y):
     with col:
+        st.write(df)
         st.pydeck_chart(pdk.Deck(
             initial_view_state=pdk.ViewState(
                 latitude=dict_df[df]["latitude"].mean(),
