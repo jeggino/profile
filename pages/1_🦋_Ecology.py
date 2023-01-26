@@ -301,3 +301,30 @@ folium.plugins.Fullscreen().add_to(m)
 st_folium(m)
 
 
+#####
+
+import pydeck as pdk
+
+st.pydeck_chart(pdk.Deck(
+    map_style=None,
+    initial_view_state=pdk.ViewState(
+        latitude=37.76,
+        longitude=-122.4,
+        zoom=6,
+        pitch=50,
+    ),
+    layers=[
+        pdk.Layer(
+           'HexagonLayer',
+           data=df_1,
+           get_position='[longitude, latitude]',
+           radius=200,
+           elevation_scale=4,
+           elevation_range=[0, 1000],
+           pickable=True,
+           extruded=True,
+        )
+    ],
+))
+
+
