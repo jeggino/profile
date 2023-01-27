@@ -65,7 +65,9 @@ with elements("image_grid"):
                 css={"object-fit": "cover"},
                 # We set the key to bind our image to a dashboard item.
                 key=f"image{i}",
-            )"---"
+            )
+            
+"---"
 
 df_raw = pd.read_csv('pages/bird_migration (1).csv')
 
