@@ -20,3 +20,5 @@ geopandas
 h3
 
 pydeck 
+
+requests
