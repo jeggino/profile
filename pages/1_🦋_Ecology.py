@@ -22,7 +22,7 @@ st.set_page_config(page_title="Ecology", page_icon="🦋",layout="wide")
 
                 
 st.image(
-        "https://flic.kr/p/2jDPN9r",
+        "pages/bird_migration (1).csv",
         width=400, # Manually Adjust the width of the image as per requirement
         )
 
