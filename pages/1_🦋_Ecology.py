@@ -26,7 +26,6 @@ import streamlit as st
 from base64 import b64encode
 from streamlit_elements import elements, dashboard, html
 
-st.set_page_config(layout="wide")
 
 # Some random image URL.
 images_url = [
