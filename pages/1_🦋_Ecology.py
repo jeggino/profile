@@ -22,7 +22,7 @@ st.set_page_config(page_title="Ecology", page_icon="🦋",layout="wide")
 
                 
 st.image(
-        "pages/bird_migration (1).csv",
+        "pages/50311150217_219463b15e_o.jpg",
         width=400, # Manually Adjust the width of the image as per requirement
         )
 
