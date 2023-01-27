@@ -68,8 +68,12 @@ with elements("image_grid"):
             
 "---"
 
-with elements("nivo_charts"):
-  with mui.Box(sx={"height": 500}):
+layout_2 = [
+    dashboard.Item("image0", 0, 0, 6, 3),
+]
+
+with elements("charts"):
+  with dashboard.Grid(layout_2):
     source = pd.DataFrame({
         'a': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
         'b': [28, 55, 43, 91, 81, 53, 19, 87, 52]
