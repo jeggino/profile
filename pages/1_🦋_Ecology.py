@@ -68,6 +68,20 @@ with elements("image_grid"):
             
 "---"
 
+with elements("nivo_charts"):
+  with mui.Box(sx={"height": 500}):
+    source = pd.DataFrame({
+        'a': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
+        'b': [28, 55, 43, 91, 81, 53, 19, 87, 52]
+    })
+
+    alt.Chart(source).mark_bar().encode(
+        x='a',
+        y='b'
+    )
+
+"---"
+
 df_raw = pd.read_csv('pages/bird_migration (1).csv')
 
 # convert in date_time data
