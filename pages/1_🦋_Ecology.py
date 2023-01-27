@@ -69,7 +69,8 @@ with elements("image_grid"):
 "---"
 
 layout_2 = [
-    dashboard.Item("image0", 0, 0, 6, 3),
+  dashboard.Item("image0", 0, 0, 6, 3,isDraggable=True,isResizable=True),
+  dashboard.Item("image2",6, 0, 6, 3,isDraggable=True,isResizable=True),
 ]
 
 with elements("charts"):
