@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-from st_on_hover_tabs import on_hover_tabs
+from streamlit_elements import elements, mui, html, dashboard
 
 import folium
 from folium import plugins
@@ -10,11 +10,7 @@ import pandas as pd
 import geopandas as gpd
 from shapely import Point, LineString, Polygon
 
-import seaborn as sns
-import matplotlib.pyplot as plt
 import altair as alt
-
-from st_aggrid import AgGrid
 
 # create exagons
 from h3 import h3
@@ -24,12 +20,48 @@ from h3 import h3
 
 st.set_page_config(page_title="Ecology", page_icon="🦋")
 
+with elements("nested_children"):
+        with mui.Paper:
+                with mui.Typography:
+                    html.p("Hello world")
+                    html.p("Goodbye world")
+                
+with elements("dashboard"):
+
+    # You can create a draggable and resizable dashboard using
+    # any element available in Streamlit Elements.
 
 
-st.write(
-        f'<iframe width: 1200px; height: 710px; overflow: auto; src="https://public.tableau.com/views/Bird_migration/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link"></iframe>',
-        unsafe_allow_html=True,
-    )
+    # First, build a default layout for every element you want to include in your dashboard
+
+    layout = [
+        # Parameters: element_identifier, x_pos, y_pos, width, height, [item properties...]
+        dashboard.Item("first_item", 0, 0, 2, 2),
+        dashboard.Item("second_item", 2, 0, 2, 2, isDraggable=False, moved=False),
+        dashboard.Item("third_item", 0, 2, 1, 1, isResizable=False),
+    ]
+
+    # Next, create a dashboard layout using the 'with' syntax. It takes the layout
+    # as first parameter, plus additional properties you can find in the GitHub links below.
+
+    with dashboard.Grid(layout):
+        mui.Paper("First item", key="first_item")
+        mui.Paper("Second item (cannot drag)", key="second_item")
+        mui.Paper("Third item (cannot resize)", key="third_item")
+
+    # If you want to retrieve updated layout values as the user move or resize dashboard items,
+    # you can pass a callback to the onLayoutChange event parameter.
+
+    def handle_layout_change(updated_layout):
+        # You can save the layout in a file, or do anything you want with it.
+        # You can pass it back to dashboard.Grid() if you want to restore a saved layout.
+        print(updated_layout)
+
+    with dashboard.Grid(layout, onLayoutChange=handle_layout_change):
+        mui.Paper("First item", key="first_item")
+        mui.Paper("Second item (cannot drag)", key="second_item")
+        mui.Paper("Third item (cannot resize)", key="third_item")
+
 
 "---"
 
@@ -75,21 +107,12 @@ df_Nico['date_time'] = df_Nico['date_time'].dt.date
 df_Sanne = df_raw[df_raw.bird_name=='Sanne'].reset_index(drop=True)
 df_Sanne['date_time'] = df_Sanne['date_time'].dt.date
 
-import folium
-from folium import plugins
-from branca.element import Figure
 
-
-
-# create the Heatmap
-fig=Figure(width=850,height=550)
 
 lat = df_raw.latitude.mean()
 long = df_raw.longitude.mean()
 
 m = folium.Map(location=[lat,long],zoom_start=3,tiles='https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',attr='Google_map')
-
-fig.add_child(m)
 
 
 lines = [
