@@ -1,5 +1,6 @@
 streamlit
 streamlit_option_menu
+streamlit-elements
 streamlit_folium
 folium
 
@@ -15,7 +16,6 @@ altair
 shapely
 geopandas 
 
-streamlit-aggrid
 
 h3
 
