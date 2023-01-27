@@ -18,7 +18,7 @@ from h3 import h3
 
 
 
-st.set_page_config(page_title="Ecology", page_icon="🦋")
+st.set_page_config(page_title="Ecology", page_icon="🦋",layout="wide")
 
 with elements("nested_children"):
         with mui.Paper:
