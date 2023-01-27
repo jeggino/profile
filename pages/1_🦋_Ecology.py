@@ -79,10 +79,12 @@ with elements("charts"):
         'b': [28, 55, 43, 91, 81, 53, 19, 87, 52]
     })
 
-    alt.Chart(source).mark_bar().encode(
+    chart_element = alt.Chart(source).mark_bar().encode(
         x='a',
         y='b'
     )
+    
+    st.altair_chart(chart_element)
 
 "---"
 
