@@ -23,4 +23,3 @@ pydeck
 
 requests
 
-tabula
