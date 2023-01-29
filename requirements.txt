@@ -22,3 +22,5 @@ h3
 pydeck 
 
 requests
+
+tabula
