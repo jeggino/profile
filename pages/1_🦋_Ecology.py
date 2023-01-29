@@ -248,6 +248,7 @@ tile_layer = folium.TileLayer(
 )
 tile_layer.add_to(m)
 
+fg = folium.FeatureGroup(name="Markers")
 
 for var in df_base['bird_name'].unique():
     df_geo = df_base[df_base['bird_name']==var]
@@ -264,7 +265,7 @@ for var in df_base['bird_name'].unique():
         overlay=False,
         highlight=True,
         line_opacity=.8,
-    ).add_child(folium.TileLayer(tiles='https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',attr='Google_map')).add_to(m)
+    ).add_child(folium.TileLayer(tiles='https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}',attr='Google_map')).add_to(fg)
     
     
     for key in list(c._children):
@@ -282,11 +283,13 @@ for var in df_base['bird_name'].unique():
 # Add a layer control panel to the map.
 m.add_child(folium.LayerControl(collapsed=True))
 
+
+
 #fullscreen
 folium.plugins.Fullscreen().add_to(m)
 
 
-st_folium(m)
+st_folium(m, feature_group_to_add=fg)
 
 
 #####
