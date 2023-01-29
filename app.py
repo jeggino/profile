@@ -28,6 +28,13 @@ page = option_menu(None,["Biography", "Ecology","Data Science","Photography","Mu
 
 if page == "Biography":
     st.title("My website")
+    import tabula
+    pdf_path = "https://github.com/chezou/tabula-py/raw/master/tests/resources/data.pdf"
+
+    dfs = tabula.read_pdf(pdf_path, stream=True)
+    # read_pdf returns list of DataFrames
+    print(len(dfs))
+    dfs[0]
 
 
 elif page == "Data Science":
