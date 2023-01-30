@@ -83,6 +83,6 @@ elif page == "Photography":
     st.image("My project.png")
     
 elif page == "Music":    
-    st_player("https://youtu.be/x3uEN78cS4Y")
+    st_player("https://youtu.be/-uLhBxPzbcM")
 
   
