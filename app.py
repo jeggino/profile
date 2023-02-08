@@ -28,6 +28,31 @@ page = option_menu(None,["Biography", "Ecology","Data Science","Photography","Mu
 
 if page == "Biography":
     st.title("My website")
+    # First, import the elements you need
+
+    from streamlit_elements import elements, mui, html
+
+    # Create a frame where Elements widgets will be displayed.
+    #
+    # Elements widgets will not render outside of this frame.
+    # Native Streamlit widgets will not render inside this frame.
+    #
+    # elements() takes a key as parameter.
+    # This key can't be reused by another frame or Streamlit widget.
+
+    with elements("new_element"):
+
+        # Let's create a Typography element with "Hello world" as children.
+        # The first step is to check Typography's documentation on MUI:
+        # https://mui.com/components/typography/
+        #
+        # Here is how you would write it in React JSX:
+        #
+        # <Typography>
+        #   Hello world
+        # </Typography>
+
+        mui.Typography("Hello world")
 
 
 
@@ -71,12 +96,7 @@ df_2 = df_model.groupby('price_class').mean().round(2)
     
     
 elif page == "Ecology":
-    # map
-    m = folium.Map(location=[44.266308, 11.719301], zoom_start=3)
-    Draw(draw_options={'circle': False,'rectangle': False,'circlemarker': False}).add_to(m)
-    Fullscreen().add_to(m)
-    LocateControl(auto_start=True).add_to(m)
-    output = st_folium(m, returned_objects=["all_drawings"])
+    
     
     
 elif page == "Photography":
