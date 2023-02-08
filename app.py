@@ -40,8 +40,8 @@ with elements("dashboard"):
     layout = [
         # Parameters: element_identifier, x_pos, y_pos, width, height, [item properties...]
         dashboard.Item("first_item", 0, 0, 2, 2),
-        dashboard.Item("second_item", 2, 0, 2, 2, isDraggable=False, moved=False),
-        dashboard.Item("third_item", 0, 2, 1, 1, isResizable=False),
+        dashboard.Item("second_item", 2, 0, 2, 2),
+        dashboard.Item("third_item", 0, 2, 1, 1),
     ]
 
     # Next, create a dashboard layout using the 'with' syntax. It takes the layout
