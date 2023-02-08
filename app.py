@@ -47,7 +47,7 @@ with elements("dashboard"):
         # Parameters: element_identifier, x_pos, y_pos, width, height, [item properties...]
         dashboard.Item("first_item", 0, 0, 2, 2),
         dashboard.Item("second_item", 2, 0, 2, 2),
-        dashboard.Item("third_item", 0, 2, 1, 1),
+        dashboard.Item("third_item", 1, 2, 1, 1),
     ]
 
     # Next, create a dashboard layout using the 'with' syntax. It takes the layout
@@ -55,8 +55,8 @@ with elements("dashboard"):
 
     with dashboard.Grid(layout):
         mui.Paper("First item", key="first_item")
-#         mui.Paper("Second item", key="second_item")
-        st.map(df)
+        with mui.Paper:
+            st.map(df)
 
         media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True, key="second_item")
 
