@@ -27,81 +27,39 @@ page = option_menu(None,["Biography", "Ecology","Data Science","Photography","Mu
                  )
 
 if page == "Biography":
-    st.title("My website")
-    # First, import the elements you need
+    with elements("dashboard"):
 
-    from streamlit_elements import elements, mui, html
+    # You can create a draggable and resizable dashboard using
+    # any element available in Streamlit Elements.
 
-    # Create a frame where Elements widgets will be displayed.
-    #
-    # Elements widgets will not render outside of this frame.
-    # Native Streamlit widgets will not render inside this frame.
-    #
-    # elements() takes a key as parameter.
-    # This key can't be reused by another frame or Streamlit widget.
+    from streamlit_elements import dashboard
 
-    with elements("new_element"):
+    # First, build a default layout for every element you want to include in your dashboard
 
-        # Let's create a Typography element with "Hello world" as children.
-        # The first step is to check Typography's documentation on MUI:
-        # https://mui.com/components/typography/
-        #
-        # Here is how you would write it in React JSX:
-        #
-        # <Typography>
-        #   Hello world
-        # </Typography>
+    layout = [
+        # Parameters: element_identifier, x_pos, y_pos, width, height, [item properties...]
+        dashboard.Item("first_item", 0, 0, 2, 2),
+        dashboard.Item("second_item", 2, 0, 2, 2, isDraggable=False, moved=False),
+        dashboard.Item("third_item", 0, 2, 1, 1, isResizable=False),
+    ]
 
-        mui.Typography("Hello world")
+    # Next, create a dashboard layout using the 'with' syntax. It takes the layout
+    # as first parameter, plus additional properties you can find in the GitHub links below.
 
+    with dashboard.Grid(layout):
+        mui.Paper("First item", key="first_item")
+        mui.Paper("Second item (cannot drag)", key="second_item")
+        mui.Paper("Third item (cannot resize)", key="third_item")
 
+    # If you want to retrieve updated layout values as the user move or resize dashboard items,
+    # you can pass a callback to the onLayoutChange event parameter.
 
-elif page == "Data Science":
-    # import the raw data
-    df_raw = pd.read_csv("HousingPrices-Amsterdam-August-2021 (1).csv").iloc[:,1:]
-    
-    # create the dataset
-    df_model = df_raw[['Price', 'Area', 'Room']]
-    fig = sns.pairplot(df_model[['Price', 'Area', 'Room']], diag_kind='auto',corner=True)
-    sns.set_theme(style="white")
-    st.pyplot(fig)
-    
-    # create the classes
-    df_model['price_class'] = pd.cut(df_model.Price,
-                                 bins=[df_model["Price"].min(),
-                                       df_model["Price"].mean(),
-                                       df_model["Price"].max()],
-                                 include_lowest=True,
-                                 labels=['low','high'])
-    
-    df_2 = df_model.groupby('price_class').mean().round(2)
-    with st.expander("See code"):
-        body = """
-df_model['price_class'] = pd.cut(df_model.Price,
-                                bins=[df_model["Price"].min(),
-                                        df_model["Price"].mean(),
-                                        df_model["Price"].max()],
-                                include_lowest=True,
-                                labels=['low','high'])
+    def handle_layout_change(updated_layout):
+        # You can save the layout in a file, or do anything you want with it.
+        # You can pass it back to dashboard.Grid() if you want to restore a saved layout.
+        print(updated_layout)
 
-df_2 = df_model.groupby('price_class').mean().round(2)
-"""
-        st.code(body, language="python")
-    st.dataframe(df_2)
-    
-    
-    
-
-
-    
-   
-    
-    
-    
-elif page == "Photography":
-    st.image("My project.png")
-    
-elif page == "Music":    
-    st_player("https://youtu.be/-uLhBxPzbcM")
-
-  
+    with dashboard.Grid(layout, onLayoutChange=handle_layout_change):
+        mui.Paper("First item", key="first_item")
+        mui.Paper("Second item (cannot drag)", key="second_item")
+        mui.Paper("Third item (cannot resize)", key="third_item")
