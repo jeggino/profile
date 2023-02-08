@@ -55,6 +55,6 @@ with elements("dashboard"):
 
     with dashboard.Grid(layout):
         mui.Paper("First item", key="first_item")
-        media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True)
+        media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True,  key="second_item")
 
    
