@@ -26,6 +26,11 @@ page = option_menu(None,["Biography", "Ecology","Data Science","Photography","Mu
                  default_index=1, orientation="horizontal", menu_icon="cast",
                  )
 
+df = pd.DataFrame(
+    np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
+    columns=['lat', 'lon'])
+
+
 from streamlit_elements import elements, mui, html,dashboard, media
 
 with elements("dashboard"):
@@ -49,8 +54,9 @@ with elements("dashboard"):
 
     with dashboard.Grid(layout):
         mui.Paper("First item", key="first_item")
-        mui.Paper("Second item", key="second_item")
-        
-        media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True,key="third_item")
+#         mui.Paper("Second item", key="second_item")
+        st.map(df,key="third_item")
+
+        media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True, key="second_item")
 
    
