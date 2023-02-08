@@ -26,13 +26,14 @@ page = option_menu(None,["Biography", "Ecology","Data Science","Photography","Mu
                  default_index=1, orientation="horizontal", menu_icon="cast",
                  )
 
+from streamlit_elements import dashboard
 
 with elements("dashboard"):
 
     # You can create a draggable and resizable dashboard using
     # any element available in Streamlit Elements.
 
-    from streamlit_elements import dashboard
+    
 
     # First, build a default layout for every element you want to include in your dashboard
 
