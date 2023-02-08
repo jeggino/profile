@@ -26,7 +26,7 @@ page = option_menu(None,["Biography", "Ecology","Data Science","Photography","Mu
                  default_index=1, orientation="horizontal", menu_icon="cast",
                  )
 
-from streamlit_elements import dashboard
+from streamlit_elements import elements, mui, html,dashboard
 
 with elements("dashboard"):
 
