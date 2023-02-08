@@ -55,9 +55,6 @@ with elements("dashboard"):
 
     with dashboard.Grid(layout):
         mui.Paper("First item", key="first_item")
-        with mui.Paper:
-            st.map(df)
-
-        media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True, key="second_item")
+        media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True)
 
    
