@@ -94,8 +94,7 @@ df_2 = df_model.groupby('price_class').mean().round(2)
 
 
     
-    
-elif page == "Ecology":
+   
     
     
     
