@@ -30,6 +30,8 @@ df = pd.DataFrame(
         "City": ["San Francisco", "San Jose", "Palo Alto"],
         "Latitude": [37.77, 37.33, 37.44],
         "Longitude": [-122.43, -121.89, -122.14],
+        "Latitude_2": [38.77, 38.33, 39.44],
+        "Longitude_2": [-121.43, -123.89, -124.14],
     }
 )
 
