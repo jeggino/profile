@@ -144,8 +144,8 @@ map_1 = alt.Chart(counties).mark_geoshape().encode(
 )
 
 # ---DASHBOARD---
-col1, col2 = st.columns([1, 1],gap="medium")
-col3, col4, col5 = st.columns([2, 1, 1],gap="medium")
+col1, col2 = st.columns([1, 1],gap="small")
+col3, col4, col5 = st.columns([2, 1, 1],gap="small")
 
 
 with col1:
