@@ -148,15 +148,10 @@ col1, col2 = st.columns(2,gap="large")
 col3, col4, col5 = st.columns(3,gap="large")
 
 
-with col1:
-    plot_1
-with col2:
-    plot_2
-with col3:
-    plot_3
-with col4:
-    map_1
-with col5:
-    st.dataframe(df,use_container_width=False)
+plot_1
+plot_2
+plot_3
+map_1
+st.dataframe(df,use_container_width=False)
 
 
