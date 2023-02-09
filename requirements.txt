@@ -12,6 +12,7 @@ matplotlib
 streamlit_player
 
 altair
+vega_datasets
 
 shapely
 geopandas 
