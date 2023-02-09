@@ -148,10 +148,14 @@ col1, col2 = st.columns(2,gap="large")
 col3, col4, col5 = st.columns(3,gap="large")
 
 
-plot_1
-plot_2
-plot_3
-map_1
+st.altair_chart(plot_1, use_container_width=True, theme="streamlit")
+"---"
+st.altair_chart(plot_2, use_container_width=True, theme="streamlit")
+"---"
+st.altair_chart(plot_3, use_container_width=True, theme="streamlit")
+"---"
+st.altair_chart(map_1, use_container_width=True, theme="streamlit")
+"---"
 st.dataframe(df,use_container_width=False)
 
 
