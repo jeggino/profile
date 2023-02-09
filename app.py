@@ -156,6 +156,6 @@ st.altair_chart(plot_3, use_container_width=True, theme="streamlit")
 "---"
 st.altair_chart(map_1, use_container_width=True, theme="streamlit")
 "---"
-st.dataframe(df,use_container_width=False)
+col4.dataframe(df,use_container_width=True)
 
 
