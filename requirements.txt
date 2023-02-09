@@ -23,6 +23,5 @@ h3
 pydeck 
 
 requests
-
-streamlit>=0.79
+streamlit_keplergl 
 keplergl
