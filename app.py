@@ -25,7 +25,6 @@ st.set_page_config(
 
 
 from st_aggrid import JsCode, AgGrid, GridOptionsBuilder
-from st_aggrid.shared import GridUpdateMode
 
 
 
@@ -47,8 +46,6 @@ df = df[['wheel_base', 'length', 'width', 'height','horsepower', 'peak_rpm',  'p
 gb = GridOptionsBuilder.from_dataframe(df)
 gb.configure_selection(selection_mode="multiple", use_checkbox=True)
 gridOptions = gb.build()
-dta = AgGrid(df, gridOptions=gridOptions,height=350, allow_unsafe_jscode=True, enable_enterprise_modules=True,
-             theme="blue",
-            )
+dta = AgGrid(df, gridOptions=gridOptions,height=350, allow_unsafe_jscode=True, enable_enterprise_modules=True)
 
 st.write(dta['selected_rows'])
