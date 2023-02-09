@@ -49,9 +49,6 @@ points = alt.Chart().mark_point().encode(
     ),
     color=alt.condition(brush, color, alt.value('lightgray')),
     size=alt.Size('precipitation:Q', scale=alt.Scale(range=[5, 200]))
-).properties(
-    width=550,
-    height=300
 ).add_selection(
     brush
 ).transform_filter(
@@ -65,8 +62,6 @@ bars = alt.Chart().mark_bar().encode(
     color=alt.condition(click, color, alt.value('lightgray')),
 ).transform_filter(
     brush
-).properties(
-    width=550,
 ).add_selection(
     click
 )
@@ -93,9 +88,6 @@ plot_2 = alt.Chart(source).mark_circle(
         legend=alt.Legend(title='Annual Global Deaths')
     ),
     alt.Color('Entity:N', legend=None)
-).properties(
-    width=450,
-    height=320
 ).transform_filter(
     alt.datum.Entity != 'All natural disasters'
 )
@@ -128,9 +120,6 @@ bar = alt.Chart(source).mark_bar().encode(
     x='Major_Genre:N',
     y='count()',
     color=alt.condition(pts, alt.ColorValue("steelblue"), alt.ColorValue("grey"))
-).properties(
-    width=550,
-    height=200
 ).add_selection(pts)
 
 plot_3 = alt.vconcat(
@@ -152,9 +141,6 @@ map_1 = alt.Chart(counties).mark_geoshape().encode(
     from_=alt.LookupData(source, 'id', ['rate'])
 ).project(
     type='albersUsa'
-).properties(
-    width=500,
-    height=300
 )
 
 # ---DASHBOARD---
