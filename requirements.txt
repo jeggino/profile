@@ -24,3 +24,5 @@ pydeck
 
 requests
 
+streamlit>=0.79
+keplergl
