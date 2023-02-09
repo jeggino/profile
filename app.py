@@ -144,18 +144,18 @@ map_1 = alt.Chart(counties).mark_geoshape().encode(
 )
 
 # ---DASHBOARD---
-col1, col2 = st.columns([1, 1],gap="small")
-col3, col4, col5 = st.columns([2, 1, 1],gap="small")
+col1, col2 = st.columns([1, 1],gap="large")
+col3, col4, col5 = st.columns([2, 1, 1],gap="large")
 
 
 with col1:
-    st.altair_chart(plot_1, use_container_width=False, theme="streamlit")
+    plot_1
 with col2:
-    st.altair_chart(plot_2, use_container_width=False, theme="streamlit")
+    plot_2
 with col3:
-    st.altair_chart(plot_3, use_container_width=False, theme="streamlit")
+    plot_3
 with col4:
-    st.altair_chart(map_1, use_container_width=False, theme="streamlit") 
+    map_1
 with col5:
     st.dataframe(df,use_container_width=False)
 
