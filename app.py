@@ -201,6 +201,7 @@ gridOptions["groupDefaultExpanded"]= -1   # expand all
 gridOptions["getDataPath"]=JsCode("function(data){ return data.orgHierarchy.split('|'); }").js_code
 
 dta = AgGrid(df, gridOptions=gridOptions, height=350, allow_unsafe_jscode=True, enable_enterprise_modules=True, theme="blue",
-             update_mode=GridUpdateMode.SELECTION_CHANGED)
+#              update_mode=GridUpdateMode.SELECTION_CHANGED
+            )
 
 st.write(dta['selected_rows'])
