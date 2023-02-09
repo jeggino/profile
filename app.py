@@ -11,7 +11,8 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from streamlit_player import st_player
+import altair as alt
+from vega_datasets import data
 
 st.set_page_config(
     page_title="Profile",
@@ -20,41 +21,156 @@ st.set_page_config(
 )
 
 
-page = option_menu(None,["Biography", "Ecology","Data Science","Photography","Music"], 
-                 icons=["bi bi-info-lg","bi bi-tree-fill",
-                        "bi bi-bar-chart-fill","bi bi-camera2",
-                        ],
-                 default_index=1, orientation="horizontal", menu_icon="cast",
-                 )
 
 df = pd.DataFrame(
     np.random.randn(1000, 2) / [50, 50] + [37.76, -122.4],
     columns=['lat', 'lon'])
 
+# ---PLOT 1---
 
-from streamlit_elements import elements, mui, html,dashboard, media
 
-with elements("dashboard"):
+source = data.seattle_weather()
 
-    # You can create a draggable and resizable dashboard using
-    # any element available in Streamlit Elements.
+scale = alt.Scale(domain=['sun', 'fog', 'drizzle', 'rain', 'snow'],
+                  range=['#e7ba52', '#a7a7a7', '#aec7e8', '#1f77b4', '#9467bd'])
+color = alt.Color('weather:N', scale=scale)
 
-    
+# We create two selections:
+# - a brush that is active on the top panel
+# - a multi-click that is active on the bottom panel
+brush = alt.selection_interval(encodings=['x'])
+click = alt.selection_multi(encodings=['color'])
 
-    # First, build a default layout for every element you want to include in your dashboard
+# Top panel is scatter plot of temperature vs time
+points = alt.Chart().mark_point().encode(
+    alt.X('monthdate(date):T', title='Date'),
+    alt.Y('temp_max:Q',
+        title='Maximum Daily Temperature (C)',
+        scale=alt.Scale(domain=[-5, 40])
+    ),
+    color=alt.condition(brush, color, alt.value('lightgray')),
+    size=alt.Size('precipitation:Q', scale=alt.Scale(range=[5, 200]))
+).properties(
+    width=550,
+    height=300
+).add_selection(
+    brush
+).transform_filter(
+    click
+)
 
-    layout = [
-        # Parameters: element_identifier, x_pos, y_pos, width, height, [item properties...]
-        dashboard.Item("first_item", 0, 0, 2, 2),
-        dashboard.Item("second_item", 2, 0, 2, 2),
-        dashboard.Item("third_item", 1, 2, 1, 1),
-    ]
+# Bottom panel is a bar chart of weather type
+bars = alt.Chart().mark_bar().encode(
+    x='count()',
+    y='weather:N',
+    color=alt.condition(click, color, alt.value('lightgray')),
+).transform_filter(
+    brush
+).properties(
+    width=550,
+).add_selection(
+    click
+)
 
-    # Next, create a dashboard layout using the 'with' syntax. It takes the layout
-    # as first parameter, plus additional properties you can find in the GitHub links below.
+plot_1 = alt.vconcat(
+    points,
+    bars,
+    data=source,
+    title="Seattle Weather: 2012-2015"
+)
 
-    with dashboard.Grid(layout):
-        mui.Paper("First item", key="first_item")
-        media.Player(url="https://www.youtube.com/watch?v=iik25wqIuFo", controls=True,  key="second_item")
+# ---PLOT 2---
+source = data.disasters.url
 
-   
+plot_2 = alt.Chart(source).mark_circle(
+    opacity=0.8,
+    stroke='black',
+    strokeWidth=1
+).encode(
+    alt.X('Year:O', axis=alt.Axis(labelAngle=0)),
+    alt.Y('Entity:N'),
+    alt.Size('Deaths:Q',
+        scale=alt.Scale(range=[0, 4000]),
+        legend=alt.Legend(title='Annual Global Deaths')
+    ),
+    alt.Color('Entity:N', legend=None)
+).properties(
+    width=450,
+    height=320
+).transform_filter(
+    alt.datum.Entity != 'All natural disasters'
+)
+
+
+# ---PLOT 3---
+source = data.movies.url
+
+pts = alt.selection(type="single", encodings=['x'])
+
+rect = alt.Chart(data.movies.url).mark_rect().encode(
+    alt.X('IMDB_Rating:Q', bin=True),
+    alt.Y('Rotten_Tomatoes_Rating:Q', bin=True),
+    alt.Color('count()',
+        scale=alt.Scale(scheme='greenblue'),
+        legend=alt.Legend(title='Total Records')
+    )
+)
+
+circ = rect.mark_point().encode(
+    alt.ColorValue('grey'),
+    alt.Size('count()',
+        legend=alt.Legend(title='Records in Selection')
+    )
+).transform_filter(
+    pts
+)
+
+bar = alt.Chart(source).mark_bar().encode(
+    x='Major_Genre:N',
+    y='count()',
+    color=alt.condition(pts, alt.ColorValue("steelblue"), alt.ColorValue("grey"))
+).properties(
+    width=550,
+    height=200
+).add_selection(pts)
+
+plot_3 = alt.vconcat(
+    rect + circ,
+    bar
+).resolve_legend(
+    color="independent",
+    size="independent"
+)
+
+# ---MAP---
+counties = alt.topo_feature(data.us_10m.url, 'counties')
+source = data.unemployment.url
+
+map_1 = alt.Chart(counties).mark_geoshape().encode(
+    color='rate:Q'
+).transform_lookup(
+    lookup='id',
+    from_=alt.LookupData(source, 'id', ['rate'])
+).project(
+    type='albersUsa'
+).properties(
+    width=500,
+    height=300
+)
+
+# ---DASHBOARD---
+col1, col2 = st.columns([3, 1])
+col3, col4, col5 = st.columns([3, 1, 1])
+
+with col1:
+    plot_1
+with col2:
+    plot_2
+with col3:
+    plot_3
+with col4:
+    map_1 
+with col1:
+    st.dataframe(df)
+
+
