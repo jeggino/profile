@@ -29,18 +29,6 @@ from st_aggrid.shared import GridUpdateMode
 
 
 
-gb = GridOptionsBuilder.from_dataframe(df)
-gb.configure_selection(selection_mode="single", use_checkbox=False)
-gb.configure_column("orgHierarchy", hide = "True")
-gb.configure_column("Name", hide = "True")
-gridOptions = gb.build()
-
-gridOptions["autoGroupColumnDef"]= {'cellRendererParams': {'checkbox': True }}
-gridOptions["treeData"]=True
-gridOptions["animateRows"]=True
-gridOptions["groupDefaultExpanded"]= -1   # expand all
-gridOptions["getDataPath"]=JsCode("function(data){ return data.orgHierarchy.split('|'); }").js_code
-
 
 
 headers = ["symboling", "normalized_losses", "make", "fuel_type", "aspiration",
