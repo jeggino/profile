@@ -48,7 +48,7 @@ gb = GridOptionsBuilder.from_dataframe(df)
 gb.configure_selection(selection_mode="multiple", use_checkbox=True)
 gridOptions = gb.build()
 dta = AgGrid(df, gridOptions=gridOptions,height=350, allow_unsafe_jscode=True, enable_enterprise_modules=True,
-#              update_mode=GridUpdateMode.SELECTION_CHANGED
+             theme="blue",
             )
 
 st.write(dta['selected_rows'])
