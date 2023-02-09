@@ -2,7 +2,6 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 
 import folium
-from folium.plugins import Draw, Fullscreen, LocateControl
 from streamlit_folium import st_folium
 
 import pandas as pd
@@ -159,18 +158,19 @@ map_1 = alt.Chart(counties).mark_geoshape().encode(
 )
 
 # ---DASHBOARD---
-col1, col2 = st.columns([3, 1])
-col3, col4, col5 = st.columns([3, 1, 1])
+col1, col2 = st.columns([3, 1],gap="large")
+col3, col4, col5 = st.columns([3, 1, 1],gap="large")
 
 with col1:
-    plot_1
+    st.altair_chart(plot_1, use_container_width=True, theme="streamlit")
+    
 with col2:
-    plot_2
+    st.altair_chart(plot_2, use_container_width=True, theme="streamlit")
 with col3:
-    plot_3
+    st.altair_chart(plot_3, use_container_width=True, theme="streamlit")
 with col4:
-    map_1 
+    st.altair_chart(map_1, use_container_width=True, theme="streamlit") 
 with col1:
-    st.dataframe(df)
+    st.dataframe(df,use_container_width=True)
 
 
