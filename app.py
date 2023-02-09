@@ -25,6 +25,8 @@ from streamlit_keplergl import keplergl_static
 from keplergl import KeplerGl
 import pandas as pd
 
+df_raw = pd.read_csv('pages/bird_migration (1).csv')
+
 df = pd.DataFrame(
     {
         "City": ["San Francisco", "San Jose", "Palo Alto"],
@@ -35,13 +37,13 @@ df = pd.DataFrame(
     }
 )
 
-st.dataframe(df.head())
+st.dataframe(df_raw.head())
 
 st.write("This is a kepler.gl map with data input in streamlit")
 
-map_1 = KeplerGl(height=400)
+map_1 = KeplerGl(height=600)
 map_1.add_data(
-    data=df, name="cities"
+    data=df_raw, name="cities"
 )  # Alternative: KeplerGl(height=400, data={"name": df})
 
 keplergl_static(map_1, center_map=True)
