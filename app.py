@@ -200,7 +200,12 @@ gridOptions["animateRows"]=True
 gridOptions["groupDefaultExpanded"]= -1   # expand all
 gridOptions["getDataPath"]=JsCode("function(data){ return data.orgHierarchy.split('|'); }").js_code
 
-dta = AgGrid(data.movies.url, height=350, allow_unsafe_jscode=True, enable_enterprise_modules=True,
+df = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/autos/imports-85.data",
+                 names=headers, 
+                 na_values="?" 
+                )
+df_1 = df[['wheel_base', 'length', 'width', 'height','horsepower', 'peak_rpm',  'price', 'fuel_type','num_doors','engine_type']]
+dta = AgGrid(df_1, height=350, allow_unsafe_jscode=True, enable_enterprise_modules=True,
 #              update_mode=GridUpdateMode.SELECTION_CHANGED
             )
 
