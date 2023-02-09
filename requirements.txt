@@ -8,7 +8,7 @@ pandas
 
 seaborn
 matplotlib
-
+st_aggrid 
 streamlit_player
 
 altair
