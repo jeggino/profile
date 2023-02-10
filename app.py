@@ -1,4 +1,5 @@
 import streamlit as st
+import time
 # from streamlit_option_menu import option_menu
 
 # import folium
@@ -21,6 +22,7 @@ st.set_page_config(
 
 @st.cache
 def load_data(url):
+    time.sleep(4)
     df = pd.read_csv(url)
     return df
 
