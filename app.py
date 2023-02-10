@@ -4,7 +4,7 @@ import streamlit as st
 # import folium
 # from streamlit_folium import st_folium
 
-# import pandas as pd
+import pandas as pd
 # import numpy as np
 
 # import seaborn as sns
