@@ -19,7 +19,7 @@ st.set_page_config(
     layout="wide",
 )
 
-@st.cache_data 
+@st.cache
 def load_data(url):
     df = pd.read_csv(url)
     return df
