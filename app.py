@@ -1,17 +1,17 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
+# from streamlit_option_menu import option_menu
 
-import folium
-from streamlit_folium import st_folium
+# import folium
+# from streamlit_folium import st_folium
 
-import pandas as pd
-import numpy as np
+# import pandas as pd
+# import numpy as np
 
-import seaborn as sns
-import matplotlib.pyplot as plt
+# import seaborn as sns
+# import matplotlib.pyplot as plt
 
-import altair as alt
-from vega_datasets import data
+# import altair as alt
+# from vega_datasets import data
 
 st.set_page_config(
     page_title="Profile",
