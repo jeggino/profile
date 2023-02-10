@@ -19,6 +19,7 @@ st.set_page_config(
     layout="wide",
 )
 
+@st.cache_data  # 👈 Add the caching decorator
 def load_data(url):
     df = pd.read_csv(url)  # 👈 Download the data
     return df
