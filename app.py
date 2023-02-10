@@ -19,37 +19,45 @@ st.set_page_config(
     layout="wide",
 )
 
+def load_data(url):
+    df = pd.read_csv(url)  # 👈 Download the data
+    return df
 
-import streamlit as st
-from streamlit_keplergl import keplergl_static
-from keplergl import KeplerGl
-import pandas as pd
+df = load_data('pages/bird_migration (1).csv')
+st.dataframe(df)
 
-df_raw = pd.read_csv('pages/bird_migration (1).csv')
+st.button("Rerun")
 
-df = pd.DataFrame(
-    {
-        "City": ["San Francisco", "San Jose", "Palo Alto"],
-        "Latitude": [37.77, 37.33, 37.44],
-        "Longitude": [-122.43, -121.89, -122.14],
-        "Latitude_2": [38.77, 38.33, 39.44],
-        "Longitude_2": [-121.43, -123.89, -124.14],
-    }
-)
+# import streamlit as st
+# from streamlit_keplergl import keplergl_static
+# from keplergl import KeplerGl
+# import pandas as pd
 
-st.dataframe(df_raw.head())
+# df_raw = pd.read_csv('pages/bird_migration (1).csv')
 
-st.write("This is a kepler.gl map with data input in streamlit")
+# df = pd.DataFrame(
+#     {
+#         "City": ["San Francisco", "San Jose", "Palo Alto"],
+#         "Latitude": [37.77, 37.33, 37.44],
+#         "Longitude": [-122.43, -121.89, -122.14],
+#         "Latitude_2": [38.77, 38.33, 39.44],
+#         "Longitude_2": [-121.43, -123.89, -124.14],
+#     }
+# )
 
-# map_1 = KeplerGl(height=600)
-# map_1.add_data(
-#     data=df_raw, name="cities"
-# )  # Alternative: 
+# st.dataframe(df_raw.head())
 
-map_1 = KeplerGl(height=400, data={"cities": df,
-                                   "seagul":df_raw})
+# st.write("This is a kepler.gl map with data input in streamlit")
 
-keplergl_static(map_1, center_map=True)
+# # map_1 = KeplerGl(height=600)
+# # map_1.add_data(
+# #     data=df_raw, name="cities"
+# # )  # Alternative: 
+
+# map_1 = KeplerGl(height=400, data={"cities": df,
+#                                    "seagul":df_raw})
+
+# keplergl_static(map_1, center_map=True)
 
 
 
