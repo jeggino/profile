@@ -19,9 +19,9 @@ st.set_page_config(
     layout="wide",
 )
 
-@st.cache_data  # 👈 Add the caching decorator
+@st.cache_data  
 def load_data(url):
-    df = pd.read_csv(url)  # 👈 Download the data
+    df = pd.read_csv(url) 
     return df
 
 df = load_data('pages/bird_migration (1).csv')
