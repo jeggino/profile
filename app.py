@@ -19,15 +19,25 @@ st.set_page_config(
     layout="wide",
 )
 
-@st.cache_data  
+@st.cache_data 
 def load_data(url):
-    df = pd.read_csv(url) 
+    df = pd.read_csv(url)
     return df
 
 df = load_data('pages/bird_migration (1).csv')
 st.dataframe(df)
 
 st.button("Rerun")
+
+# @st.cache_data  
+# def load_data(url):
+#     df = pd.read_csv(url) 
+#     return df
+
+# df = load_data('pages/bird_migration (1).csv')
+# st.dataframe(df)
+
+# st.button("Rerun")
 
 # import streamlit as st
 # from streamlit_keplergl import keplergl_static
